@@ -222,8 +222,7 @@ Complete code files for this lab can be found in the  C:\Labfiles\L07\Resources 
 1. Create permit.
 
    - In program.cs, add the following code under the Data Operations comment.
-
-     ```csharp
+    ```csharp
     Console.WriteLine("Create permit");
     Entity newPermit = new Entity("contoso_permit");
     newPermit["contoso_name"] = "Organization Service Permit";
@@ -231,14 +230,14 @@ Complete code files for this lab can be found in the  C:\Labfiles\L07\Resources 
     newPermit["contoso_startdate"] = DateTime.Now;
     Guid permitid = crmSvc.Create(newPermit);
     Console.WriteLine("Permit={0}", permitid.ToString());
-     ```
+    ```
 
 1. List inspections.
 
    - In program.cs, add the following code under the Data Operations comment.
 
-     ```csharp
-      Console.WriteLine("Retrieving inspections");
+    ```csharp
+    Console.WriteLine("Retrieving inspections");
     QueryExpression inspectionsQuery = new QueryExpression
     {
         EntityName = "contoso_inspection",
@@ -256,7 +255,7 @@ Complete code files for this lab can be found in the  C:\Labfiles\L07\Resources 
         EntityReference permit = (EntityReference)inspection["contoso_permit"];
         Console.WriteLine("Inspection {0} {1} {2}", permit.Id.ToString(), permit.Name, inspection["contoso_name"]);
     }
-     ```
+   ```
 
 1. Build the project.
 
