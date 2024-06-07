@@ -49,55 +49,7 @@ Complete code files for this lab can be found in the  C:\Labfiles\L07\Resources 
 
      ![Organization Service URL - screenshot](../images/L07/organization-service-endpoint.png)
 
-### Task 1.2: Early-bound classes
-
-1. Launch **XrmToolBox**.
-1. Select the **Tools** tab in XRMToolBox.
-1. Search for `early` and select **Early Bound Generator**.
-1. Select **Yes** to connect to an organization.
-1. Select your **Dev** connection and select **OK**.
-
-     ![Early Bound Generator - screenshot](../images/L07/early-bound-tool.png)
-
-1. Configure early bound options
-
-   - Under *Entities*, select the ellipsis next to **Entities Whitelist** and add *Contact* and *User*.
-
-     ![Early Bound Whitelist - screenshot](../images/L07/early-bound-entities-whitelist.png)
-
-   - Select **Save**.
-   - Under *Entities*, select the ellipsis (...) next to **Entities Prefix Whitelist**.
-   - Enter `contoso` and select **OK**.
-
-1. Generate early bound classes
-
-   - Select **Create Entities**.
-   - Select **Office 365** for *Deployment Type*.
-   - Check **Display list of available organizations**.
-   - Check **Show Advanced**.
-   - Enter your tenant credentials.
-   - Select **Login**.
-   - Select your **Development** environment and select **Login**.
-   - Wait for CrmSvcUtil to complete.
-
-1. Generate choice enums
-
-   - Select **Create OptionSets**.
-   - Select **Office 365** for *Deployment Type*.
-   - Check **Display list of available organizations**.
-   - Check **Show Advanced**.
-   - Enter your tenant credentials.
-   - Select **Login**.
-   - Select your **Development** environment and select **Login**.
-   - Wait for CrmSvcUtil to complete.
-
-1. Verify files have been generated
-
-   - Open Windows Explorer and change to the **C:\Users\Admin\AppData\Roaming\MscrmTools\XrmToolBox\Settings\EBG** folder. You should see Entities.cs and OptionSets.cs class files.
-
-     ![Early bound classes - screenshot](../images/L07/early-bound-entity-classes.png)
-
-### Task 1.3: Create Console app
+### Task 1.2: Create Console app
 
 > [!NOTE]
 > The virtual machine used in the lab environment has Visual Studio 2019 Community Edition installed. The labs are have been verified against this version of Visual Studio. If you are using a different version or edition of Visual Studio, the steps may differ.
@@ -245,7 +197,7 @@ Complete code files for this lab can be found in the  C:\Labfiles\L07\Resources 
 1. Select **File** and **Exit**.
 
 
-### Task 1.4: Data operations
+### Task 1.3: Data operations
 
 1. Start Visual Studio.
 
@@ -272,13 +224,13 @@ Complete code files for this lab can be found in the  C:\Labfiles\L07\Resources 
    - In program.cs, add the following code under the Data Operations comment.
 
      ```csharp
-     Console.WriteLine("Create permit");
-     contoso_Permit newPermit = new contoso_Permit();
-     newPermit.contoso_Name = "Organization Service Permit";
-     newPermit.contoso_NewSize = 1000;
-     newPermit.contoso_StartDate = DateTime.Now;
-     Guid permitid = crmSvc.Create(newPermit);
-     Console.WriteLine("Permit={0}", permitid.ToString());
+    Console.WriteLine("Create permit");
+    Entity newPermit = new Entity("contoso_permit");
+    newPermit["contoso_name"] = "Organization Service Permit";
+    newPermit["contoso_newsize"] = 1000;
+    newPermit["contoso_startdate"] = DateTime.Now;
+    Guid permitid = crmSvc.Create(newPermit);
+    Console.WriteLine("Permit={0}", permitid.ToString());
      ```
 
 1. List inspections.
@@ -286,23 +238,24 @@ Complete code files for this lab can be found in the  C:\Labfiles\L07\Resources 
    - In program.cs, add the following code under the Data Operations comment.
 
      ```csharp
-     Console.WriteLine("Retrieving inspections");
-     QueryExpression inspectionsQuery = new QueryExpression
-     {
-         EntityName = contoso_Inspection.EntityLogicalName,
-         ColumnSet = new ColumnSet(false)
-     };
-     inspectionsQuery.ColumnSet.AddColumn("contoso_permit");
-     inspectionsQuery.ColumnSet.AddColumn("contoso_name");
-     inspectionsQuery.Criteria.AddCondition("statuscode", ConditionOperator.Equal, (int)contoso_Inspection_StatusCode.Pending);
-     inspectionsQuery.Distinct = true;
-     EntityCollection inspections = crmSvc.RetrieveMultiple(inspectionsQuery);
-     Console.WriteLine("Number of Pending Inspections=" + inspections.Entities.Count.ToString());
-     foreach (contoso_Inspection inspection in inspections.Entities)
-     {
-         EntityReference permit = inspection.contoso_Permit;
-         Console.WriteLine("Inspection {0} {1} {2}", permit.Id.ToString(), permit.Name, inspection.contoso_Name);
-     }
+      Console.WriteLine("Retrieving inspections");
+    QueryExpression inspectionsQuery = new QueryExpression
+    {
+        EntityName = "contoso_inspection",
+        ColumnSet = new ColumnSet(false)
+    };
+    inspectionsQuery.ColumnSet.AddColumn("contoso_permit");
+    inspectionsQuery.ColumnSet.AddColumn("contoso_name");
+    inspectionsQuery.Criteria.AddCondition("statuscode", ConditionOperator.Equal, 330650001);
+    inspectionsQuery.Distinct = true;
+    EntityCollection inspections = crmSvc.RetrieveMultiple(inspectionsQuery);
+    Console.WriteLine("Number of Pending Inspections=" + inspections.Entities.Count.ToString());
+    
+    foreach (Entity inspection in inspections.Entities)
+    {
+        EntityReference permit = (EntityReference)inspection["contoso_permit"];
+        Console.WriteLine("Inspection {0} {1} {2}", permit.Id.ToString(), permit.Name, inspection["contoso_name"]);
+    }
      ```
 
 1. Build the project.
