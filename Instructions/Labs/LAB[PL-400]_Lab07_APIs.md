@@ -204,21 +204,6 @@ Complete code files for this lab can be found in the  C:\Labfiles\L07\Resources 
    - Launch Visual Studio 2019.
    - Select **Permit console.sln** under Open recent.
 
-1. Add early bound classes.
-
-   - In Solution Explorer, right-click the *Permit console* project and select **Add**, and then select **Existing Item**.
-   - Browse to **C:\Users\Admin\AppData\Roaming\MscrmTools\XrmToolBox\Settings\EBG**.
-   - Select `Entities.cs` and select **Add**.
-   - In Solution Explorer, right-click the *Permit console* project and select **Add**, and then select **Existing Item**.
-   - Browse to **C:\Users\Admin\AppData\Roaming\MscrmTools\XrmToolBox\Settings\EBG**.
-   - Select `OptionSets.cs` and select **Add**.
-
-1. Add using statement at the top of Program.cs.
-
-   ```csharp
-   using CrmEarlyBound;
-   ```
-
 1. Create permit.
 
    - In program.cs, add the following code under the Data Operations comment.
