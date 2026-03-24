@@ -126,7 +126,7 @@ In this exercise, you will import data the into your **Development** environment
 
 1. Select the **X** to close the Configuration Migration Tool.
 
-### Task 2.2 – Examine the data
+### Task 2.2 – Create test contact
 
 1. Navigate to the Power Apps Maker portal `https://make.powerapps.com`
 
@@ -135,6 +135,19 @@ In this exercise, you will import data the into your **Development** environment
 1. In the Maker portal, select **Apps** from the left navigation.
 
 1. For the **Permit Management** model-driven app, select the ellipsis **...** and select **Play**, signing in with your Microsoft 365 credentials if prompted.
+
+1. In the left navigation of the app, select **Contacts**.
+
+1. Select **+ New**.
+
+1. Enter `John` for **First Name** and `Doe` for **Last Name**.
+
+1. Select **Save & Close**.
+
+   > [!NOTE]
+   > The **John Doe** contact is required in later labs.
+
+### Task 2.3 – Examine the data
 
 1. In the left navigation of the app, select **Inspections**.
 

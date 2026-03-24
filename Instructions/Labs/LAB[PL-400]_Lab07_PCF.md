@@ -86,6 +86,9 @@ Complete source code files for this lab can be found in the  C:\Labfiles\L07\Res
 
      ![pcfTimelineControl folder - screenshot](../images/L07/pcf-folder.png)
 
+     > [!NOTE]
+     > The screenshot may show a different lab folder path. Ensure you are using the **L07** folder as shown in the commands above.
+
 1. Create a solution project for a pcf dataset component named **timelinecontrol**.
 
    - Initialize the component. This command will create a set of files that will implement a dataset component. You will customize these files as we continue.
