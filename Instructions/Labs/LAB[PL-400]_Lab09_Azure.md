@@ -216,6 +216,17 @@ As part of configuring the event publishing, you will complete the following:
 
 ### Task 4.1: Create a storage account
 
+1. Sign in to the Azure portal.
+
+   - Open an **InPrivate** or **Incognito** browser window.
+
+   - Navigate to the Azure portal `https://portal.azure.com`.
+
+   - Sign in with your **Azure credentials**.
+
+     > [!NOTE]
+     > Your Azure credentials may be different from your Microsoft 365 tenant credentials. Check your lab environment details for the correct Azure username and password.
+
 1. Create Storage account.
 
    - Select **Show portal menu** and then select **+ Create a resource**.
@@ -1087,7 +1098,7 @@ As part of configuring the custom connector, you will complete the following
 
      ![Label text value - screenshot](../images/L09/Mod_2_Custom_Connector_image60.png)
 
-1. Add button to the Main screen.
+1. Add a button to the Main screen and add Power Fx formula to navigate to the CPM Calc screen.
 
    - Select the **Main Screen**.
 
@@ -1101,11 +1112,7 @@ As part of configuring the custom connector, you will complete the following
 
    - Place the button on the bottom right of the **Main Screen**.
 
-1. Navigate to the CPM Calc screen.
-
-   - Select the **CPM Button** button.
-
-   - Set the **OnSelect** property of the **CPM Button** to the formula below.
+   - With the **CPM Button** selected, set the **OnSelect** property to the formula below.
 
      ```powerappsfl
      Set(CalculatedValue, ""); Navigate('CPM Calc Screen', ScreenTransition.None);
